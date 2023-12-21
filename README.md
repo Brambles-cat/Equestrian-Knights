@@ -1,3 +1,3 @@
-﻿# My HK Mod1
+﻿# Equestrian Knights
 
-A Hollow Knight mod that...
+(Working title)
