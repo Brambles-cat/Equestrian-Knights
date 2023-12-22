@@ -34,7 +34,7 @@ namespace PonyMod
             return base.GetPreloadNames();
         }
 
-        string playingClip;
+        string playingClip = null!;
 
         public void OnHeroUpdate()
         {

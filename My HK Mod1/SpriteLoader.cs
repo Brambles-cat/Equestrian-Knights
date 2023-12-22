@@ -7,8 +7,8 @@ namespace PonyMod
 {
     class SpriteLoader {
 
-        static tk2dSpriteDefinition[] defs;
-        public static HeroAnimationController animCtrl;
+        static tk2dSpriteDefinition[] defs = null!;
+        public static HeroAnimationController animCtrl = null!;
 
         public static void init(On.HeroController.orig_Awake orig, HeroController self)
         {
