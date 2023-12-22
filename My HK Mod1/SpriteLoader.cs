@@ -2,7 +2,8 @@
 using UnityEngine;
 using System.IO;
 
-namespace PonyMod {
+namespace PonyMod
+{
     class SpriteLoader {
 
         static tk2dSpriteDefinition[] defs;

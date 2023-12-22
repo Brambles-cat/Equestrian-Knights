@@ -5,11 +5,13 @@ using Satchel;
 
 namespace PonyMod
 {
-    public class PonyMod : Mod
+    public class PonyMod : Mod, ILocalSettings<LocalData>, IGlobalSettings<GlobalData>
     {
         public static string DataDirectory = AssemblyUtils.getCurrentDirectory();
         new public string GetName() => "Equestrian Knights";
-        public override string GetVersion() => "v1.0.0";
+        public override string GetVersion() => "v1.0.1";
+        public static LocalData localSaveData { get; set; } = new LocalData();
+        public static GlobalData globalSaveData { get; set; } = new GlobalData();
 
 
         public override void Initialize()
@@ -31,7 +33,7 @@ namespace PonyMod
             return base.GetPreloadNames();
         }
 
-        string playingClip = null;
+        string playingClip;
 
         public void OnHeroUpdate()
         {
@@ -43,12 +45,11 @@ namespace PonyMod
             if (Input.GetKeyDown(KeyCode.H)) {
                 SpriteLoader.animCtrl.UpdateState(GlobalEnums.ActorStates.hard_landing);
             }
-            else if (Input.GetKeyDown(KeyCode.J))
+            else if (Input.GetKeyDown(KeyCode.P))
             {
                 SpriteLoader.LoadSprites();
             }
-            
-            else if (Input.GetKeyDown(KeyCode.I))
+            else if (Input.GetKeyDown(KeyCode.U))
             {
                 //tk2dSpriteDefinition[] defs = HeroController.instance.gameObject.GetComponent<tk2dSprite>().Collection.spriteDefinitions;
                 //for (int i = 0; i < defs.Length; ++i)
@@ -59,7 +60,29 @@ namespace PonyMod
                     Log($"{clips[i].name}");
                 }
             }
+            else if (Input.GetKey(KeyCode.I))
+            {
+                PonySwitcher.nextPony();
+            }
         }
+
+
+
+        void IGlobalSettings<GlobalData>.OnLoadGlobal(GlobalData s)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        GlobalData IGlobalSettings<GlobalData>.OnSaveGlobal()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnLoadLocal(LocalData data) => localSaveData = data;
+        public LocalData OnSaveLocal() => localSaveData;
+
+        public void OnLoadGlobal(GlobalData data) => globalSaveData = data;
+        public GlobalData OnSaveGlobal() => globalSaveData;
     }
 }
 

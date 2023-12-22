@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Equestrian Knights", "My HK Mod1\Equestrian Knights.csproj", "{A1C93D77-F6E3-4DAD-9E6D-174E4CC6BD05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Equestrian_Knights", "My HK Mod1\Equestrian_Knights.csproj", "{A1C93D77-F6E3-4DAD-9E6D-174E4CC6BD05}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{63395E07-E451-4C7C-8C07-5433C3FDFC80}"
 	ProjectSection(SolutionItems) = preProject
