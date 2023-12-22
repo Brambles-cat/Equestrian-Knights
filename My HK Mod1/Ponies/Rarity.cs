@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PonyMod.Ponies
+﻿namespace PonyMod.Ponies
 {
-    internal class Rarity : Pony
+    class Rarity : Pony
     {
-
+        public Rarity(string spriteSheetName) : base(spriteSheetName) { }
     }
 }

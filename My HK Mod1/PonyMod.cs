@@ -2,6 +2,7 @@ using Modding;
 using System.Collections.Generic;
 using UnityEngine;
 using Satchel;
+using PonyMod.Ponies;
 
 namespace PonyMod
 {
@@ -9,7 +10,7 @@ namespace PonyMod
     {
         public static string DataDirectory = AssemblyUtils.getCurrentDirectory();
         new public string GetName() => "Equestrian Knights";
-        public override string GetVersion() => "v1.0.1";
+        public override string GetVersion() => "v0.0.1";
         public static LocalData localSaveData { get; set; } = new LocalData();
         public static GlobalData globalSaveData { get; set; } = new GlobalData();
 
@@ -67,18 +68,10 @@ namespace PonyMod
         }
 
 
-
-        void IGlobalSettings<GlobalData>.OnLoadGlobal(GlobalData s)
-        {
-            throw new System.NotImplementedException();
+        void ILocalSettings<LocalData>.OnLoadLocal(LocalData data) {
+            localSaveData = data;
+            Pony.currentPony = PonySwitcher.getPony(data.currentPony);
         }
-
-        GlobalData IGlobalSettings<GlobalData>.OnSaveGlobal()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void OnLoadLocal(LocalData data) => localSaveData = data;
         public LocalData OnSaveLocal() => localSaveData;
 
         public void OnLoadGlobal(GlobalData data) => globalSaveData = data;

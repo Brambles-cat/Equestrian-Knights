@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PonyMod.Ponies
+﻿namespace PonyMod.Ponies
 {
     class Fluttershy : Pony
     {
-
+        public Fluttershy(string spriteSheetName) : base(spriteSheetName) { }
     }
 }

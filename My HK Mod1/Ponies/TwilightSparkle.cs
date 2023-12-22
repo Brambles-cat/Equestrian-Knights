@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PonyMod.Ponies
+﻿namespace PonyMod.Ponies
 {
-    public class TwilightSparkle : Pony
+    class TwilightSparkle : Pony
     {
+        public TwilightSparkle(string spriteSheetName) : base(spriteSheetName) { }
     }
 }

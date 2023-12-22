@@ -1,6 +1,7 @@
 ﻿using Logger = Modding.Logger;
 using UnityEngine;
 using System.IO;
+using PonyMod.Ponies;
 
 namespace PonyMod
 {
@@ -8,14 +9,11 @@ namespace PonyMod
 
         static tk2dSpriteDefinition[] defs;
         public static HeroAnimationController animCtrl;
-        static Texture2D pinkieTest;
 
         public static void init(On.HeroController.orig_Awake orig, HeroController self)
         {
             animCtrl = self.GetComponent<HeroAnimationController>();
             defs = self.GetComponent<tk2dSprite>().Collection.spriteDefinitions;
-            pinkieTest = new Texture2D(4096, 4096);
-            pinkieTest.LoadImage(File.ReadAllBytes($"{PonyMod.DataDirectory}/Pinkie.png"));
             orig(self);
             Logger.Log("awaken");
         }
@@ -26,7 +24,7 @@ namespace PonyMod
             tk2dSpriteAnimationClip
                 clip = animCtrl.animator.GetClipByName("Run"),
                 nextClip = animCtrl.animator.GetClipByName("Slash");
-            HeroController.instance.gameObject.GetComponent<tk2dSprite>().GetCurrentSpriteDef().material.mainTexture = pinkieTest;
+            HeroController.instance.gameObject.GetComponent<tk2dSprite>().GetCurrentSpriteDef().material.mainTexture = Pony.currentPony.texture;
             Logger.Log(clip.frames.Length);
             int i = 0;
             foreach(var frame in clip.frames)

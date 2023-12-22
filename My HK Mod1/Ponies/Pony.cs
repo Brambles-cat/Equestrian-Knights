@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using UnityEngine;
 
 namespace PonyMod.Ponies
 {
     public abstract class Pony
     {
-        Texture2D texture;
+        public Texture2D texture = new Texture2D(4096, 4096);
 
+        public Pony(string spriteSheetName) {
+            texture.LoadImage(File.ReadAllBytes($"{PonyMod.DataDirectory}/{spriteSheetName}.png"));
+        }
 
         public static Pony
-            twilight = new TwilightSparkle(),
-            applejack = new Applejack(),
-            fluttershy = new Fluttershy(),
-            pinkie = new PinkiePie(),
-            rainbow = new RainbowDash(),
-            rarity = new Rarity();
+            currentPony,
+            twilight = new TwilightSparkle("Twilight"),
+            applejack = new Applejack("Applejack"),
+            fluttershy = new Fluttershy("Fluttershy"),
+            pinkie = new PinkiePie("Pinkie Pie"),
+            rainbow = new RainbowDash("Rainbow Dash"),
+            rarity = new Rarity("Rarity");
     }
 }
