@@ -4,8 +4,8 @@ namespace PonyMod
 {
     public class LocalData
     {
-        public string currentPony = "twilight";
-        List<string> party = new List<string> { "twilight" };
+        public string currentPony = "twilight sparkle";
+        List<string> party = new List<string> { "twilight sparkle" };
         List<string> acquiredElements = new List<string>();
         Dictionary<string, int> items = new Dictionary<string, int>();
 
