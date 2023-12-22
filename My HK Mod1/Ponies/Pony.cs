@@ -12,8 +12,8 @@ namespace PonyMod.Ponies
         }
 
         public static Pony
-            currentPony,
-            twilight = new TwilightSparkle("Twilight"),
+            currentPony = null!,
+            twilight = new TwilightSparkle("Twilight Sparkle"),
             applejack = new Applejack("Applejack"),
             fluttershy = new Fluttershy("Fluttershy"),
             pinkie = new PinkiePie("Pinkie Pie"),
