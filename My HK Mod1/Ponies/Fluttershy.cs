@@ -1,7 +1,11 @@
-﻿namespace PonyMod.Ponies
+﻿using UnityEngine;
+
+namespace PonyMod.Ponies
 {
     class Fluttershy : Pony
     {
-        public Fluttershy(string spriteSheetName) : base(spriteSheetName) { }
+        public Fluttershy(string name, Vector3 offset) : base(name, offset) {
+            canFly = true;
+        }
     }
 }

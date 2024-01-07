@@ -1,7 +1,12 @@
-﻿namespace PonyMod.Ponies
+﻿using UnityEngine;
+
+namespace PonyMod.Ponies
 {
     class TwilightSparkle : Pony
     {
-        public TwilightSparkle(string spriteSheetName) : base(spriteSheetName) { }
+        public TwilightSparkle(string name, Vector3 offset) : base(name, offset)
+        {
+
+        }
     }
 }
