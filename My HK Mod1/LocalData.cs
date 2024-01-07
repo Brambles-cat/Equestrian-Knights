@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Modding;
+using System.Collections.Generic;
 
 namespace PonyMod
 {
     public class LocalData
     {
-        public string currentPony = "twilight sparkle";
-        List<string> party = new List<string> { "twilight sparkle" };
+        public string currentPony = "fluttershy";//"twilight sparkle";
+        public List<string> party = new List<string> { "applejack", "fluttershy" };
         List<string> acquiredElements = new List<string>();
         Dictionary<string, int> items = new Dictionary<string, int>();
 
@@ -14,10 +15,6 @@ namespace PonyMod
             party.Add(pony);
         }
 
-        public string nextPony()
-        {
-            return party[party.IndexOf(currentPony) + 1 % party.Count];
-        }
         public string previousPony()
         {
             int prevIndex = party.IndexOf(currentPony) - 1;
