@@ -14,11 +14,5 @@ namespace PonyMod
         {
             party.Add(pony);
         }
-
-        public string previousPony()
-        {
-            int prevIndex = party.IndexOf(currentPony) - 1;
-            return party[prevIndex < 0 ? party.Count - 1 : prevIndex];
-        }
     }
 }
