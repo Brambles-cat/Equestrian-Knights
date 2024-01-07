@@ -1,35 +1,31 @@
-﻿using PonyMod.Ponies;
+﻿using Modding;
+using PonyMod.Ponies;
 using System;
+using System.Collections.Generic;
 using static PonyMod.PonyMod;
 
 namespace PonyMod
 {
     class PonySwitcher
     {
-        public static Pony getPony(string pony)
+        
+        public static void nextPony()
         {
-            switch (pony)
-            {
-                case "twilight sparkle": return Pony.twilight;
-                case "applejack": return Pony.applejack;
-                case "fluttershy": return Pony.fluttershy;
-                case "pinkie pie": return Pony.pinkie;
-                case "rainbow dash": return Pony.rainbow;
-                case "rarity": return Pony.rarity;
+            int newIndex = (data.party.IndexOf(data.currentPony) + 1) % data.party.Count;
+            data.currentPony = data.party[newIndex];
 
-                default: throw new NotImplementedException($"invalid pony name: {localSaveData.currentPony}");
-            }
-        }
-        public static Pony nextPony()
-        {
-            localSaveData.currentPony = localSaveData.nextPony();
-            return getPony(localSaveData.currentPony);
+            Pony.currentPony = Pony.getFromStr(data.currentPony);
+            Logger.Log(data.currentPony);
+            SpriteLoader.play(Pony.currentPony.currentAnim);
         }
 
-        public static Pony previousPony()
+        public static void previousPony()
         {
-            localSaveData.currentPony = localSaveData.previousPony();
-            return getPony(localSaveData.currentPony);
+            int prevIndex = data.party.IndexOf(data.currentPony) - 1;
+            data.currentPony = data.party[prevIndex < 0 ? data.party.Count - 1 : prevIndex];
+            Logger.Log(data.currentPony);
+            Pony.currentPony = Pony.getFromStr(data.currentPony);
+            SpriteLoader.play(Pony.currentPony.currentAnim);
         }
     }
 }
