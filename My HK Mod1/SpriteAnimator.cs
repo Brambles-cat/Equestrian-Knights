@@ -1,14 +1,11 @@
 ﻿using Logger = Modding.Logger;
 using UnityEngine;
 using PonyMod.Ponies;
-using System;
-using System.Collections.ObjectModel;
 using Satchel;
-using System.IO;
 using GlobalEnums;
 
 namespace PonyMod {
-    class SpriteLoader {
+    class SpriteAnimator {
         private static bool initialized = false;
         public static GameObject displayedPony = new GameObject();
         private static CustomAnimationController animCtrlr = null!;
@@ -31,27 +28,27 @@ namespace PonyMod {
         public static void AnimationUpdate()
         {
             if (!initialized) return;
+
             ActorStates actorState = HeroController.instance.GetComponent<HeroAnimationController>().actorState;
-            
+            HeroControllerStates controllerStates = HeroController.instance.cState;  // move this elsewhere and the above line as well
+
             if (actorState == ActorStates.running)
             {
                 playIfNotAlready(Pony.AnimState.walk);
+                if (controllerStates.inWalkZone)
+                {
+                    animCtrlr.anim.fps = 20;
+                    return;
+                }
                 animCtrlr.anim.fps = 32;
             }
             else if (actorState == ActorStates.idle)
             {
-                playIfNotAlready(Pony.AnimState.idle);
-            }
-
-            HeroControllerStates controllerStates = HeroController.instance.GetComponent<HeroControllerStates>();
-
-            if (controllerStates == null) return;
-
-            if(controllerStates.inWalkZone)
-            {
-                Logger.Log("in walk zone");
-                playIfNotAlready(Pony.AnimState.walk);
-                animCtrlr.anim.fps = 20;
+                if (controllerStates.lookingUpAnim)
+                {
+                    playIfNotAlready(Pony.AnimState.look_up);
+                }
+                else playIfNotAlready(Pony.AnimState.idle);
             }
         }
 
@@ -62,7 +59,7 @@ namespace PonyMod {
                 Pony.currentPony.currentAnim = animation;
                 animCtrlr.Init(Pony.currentPony.anims[(int) animation]);
                 animCtrlr.currentFrame = 0;
-                Modding.Logger.Log($"Playing: {animation}");
+                Logger.Log($"Playing: {animation}");
             }
         }
 
@@ -72,6 +69,10 @@ namespace PonyMod {
             animCtrlr.Init(Pony.currentPony.anims[(int) animation]);
             animCtrlr.currentFrame = 0;
             Modding.Logger.Log($"Playing: {animation}");
+        }
+        public static void updateOffset()
+        {
+            displayedPony.transform.position = HeroController.instance.transform.position + Pony.currentPony.centerOffset;
         }
     }
 }
