@@ -20,11 +20,11 @@ namespace PonyMod
 
         public override void Initialize()
         {
-            On.HeroController.Awake += SpriteLoader.init;
+            On.HeroController.Awake += SpriteAnimator.init;
             On.HeroController.Awake += InitHero;
             //On.HeroController.FixedUpdate += test;
             ModHooks.HeroUpdateHook += OnHeroUpdate;
-            ModHooks.HeroUpdateHook += SpriteLoader.AnimationUpdate;
+            ModHooks.HeroUpdateHook += SpriteAnimator.AnimationUpdate;
             //On.HeroController.SceneInit += InitHero;
         }
 
@@ -50,7 +50,7 @@ namespace PonyMod
             }
             else if (Input.GetKeyDown(KeyCode.F))
             {
-                SpriteLoader.StartSpritesTemp();
+                SpriteAnimator.StartSpritesTemp();
                 //HeroController.instance.GetComponent<MeshRenderer>().enabled = false;
             }
 
@@ -58,25 +58,25 @@ namespace PonyMod
             else if (Input.GetKeyDown(KeyCode.J))
             {
                 offset.x += -0.1f;
-                SpriteLoader.displayedPony.transform.position = HeroController.instance.transform.position + offset;
+                SpriteAnimator.displayedPony.transform.position = HeroController.instance.transform.position + offset;
                 Log(offset);
             }
             else if (Input.GetKeyDown(KeyCode.L))
             {
                 offset.x += 0.1f;
-                SpriteLoader.displayedPony.transform.position = HeroController.instance.transform.position + offset;
+                SpriteAnimator.displayedPony.transform.position = HeroController.instance.transform.position + offset;
                 Log(offset);
             }
             else if (Input.GetKeyDown(KeyCode.I))
             {
                 offset.y += 0.1f;
-                SpriteLoader.displayedPony.transform.position = HeroController.instance.transform.position + offset;
+                SpriteAnimator.displayedPony.transform.position = HeroController.instance.transform.position + offset;
                 Log(offset);
             }
             else if(Input.GetKeyDown(KeyCode.K))
             {
                 offset.y += -0.1f;
-                SpriteLoader.displayedPony.transform.position = HeroController.instance.transform.position + offset;
+                SpriteAnimator.displayedPony.transform.position = HeroController.instance.transform.position + offset;
                 Log(offset);
             }
         }
