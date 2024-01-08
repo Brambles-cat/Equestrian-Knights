@@ -31,7 +31,7 @@ namespace PonyMod.Ponies
         public static Pony
             currentPony = null!,
             twilight = new TwilightSparkle("Twilight Sparkle", Vector3.zero),
-            applejack = new Applejack("Applejack", new Vector3(-0.2f, 0.1f, 0)),
+            applejack = new Applejack("Applejack", new Vector3(-0.3f, 0.1f, 0)),
             fluttershy = new Fluttershy("Fluttershy", new Vector3(-0.6f, 0.1f, 0f)),
             pinkie = new PinkiePie("Pinkie Pie", Vector3.zero),
             rainbow = new RainbowDash("Rainbow Dash", Vector3.zero),
@@ -55,13 +55,14 @@ namespace PonyMod.Ponies
         public enum AnimState
         {
             sit,
+            look_up,
+            look_down,
             idle,
             walk,
             run,
             air_ascending,
             fly,
             fall,
-
         }
     }
 }
