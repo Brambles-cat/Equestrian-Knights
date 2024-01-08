@@ -16,7 +16,8 @@ namespace PonyMod
 
             Pony.currentPony = Pony.getFromStr(data.currentPony);
             Logger.Log(data.currentPony);
-            SpriteLoader.play(Pony.currentPony.currentAnim);
+            SpriteAnimator.updateOffset();
+            SpriteAnimator.play(Pony.currentPony.currentAnim);
         }
 
         public static void previousPony()
@@ -25,7 +26,8 @@ namespace PonyMod
             data.currentPony = data.party[prevIndex < 0 ? data.party.Count - 1 : prevIndex];
             Logger.Log(data.currentPony);
             Pony.currentPony = Pony.getFromStr(data.currentPony);
-            SpriteLoader.play(Pony.currentPony.currentAnim);
+            SpriteAnimator.updateOffset();
+            SpriteAnimator.play(Pony.currentPony.currentAnim);
         }
     }
 }
