@@ -9,10 +9,5 @@ namespace PonyMod
         public List<string> party = new List<string> { "applejack", "fluttershy" };
         List<string> acquiredElements = new List<string>();
         Dictionary<string, int> items = new Dictionary<string, int>();
-
-        public void addPony(string pony)
-        {
-            party.Add(pony);
-        }
     }
 }
