@@ -22,6 +22,7 @@ namespace PonyMod
         {
             On.HeroController.Awake += SpriteAnimator.init;
             On.HeroController.Awake += InitHero;
+            On.HeroController.Awake += InitHero;
             //On.HeroController.FixedUpdate += test;
             ModHooks.HeroUpdateHook += OnHeroUpdate;
             ModHooks.HeroUpdateHook += SpriteAnimator.AnimationUpdate;
@@ -50,8 +51,7 @@ namespace PonyMod
             }
             else if (Input.GetKeyDown(KeyCode.F))
             {
-                SpriteAnimator.StartSpritesTemp();
-                //HeroController.instance.GetComponent<MeshRenderer>().enabled = false;
+                HeroController.instance.GetComponent<MeshRenderer>().enabled = !HeroController.instance.GetComponent<MeshRenderer>().enabled;
             }
 
             // offset

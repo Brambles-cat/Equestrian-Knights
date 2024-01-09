@@ -32,7 +32,7 @@ namespace PonyMod.Ponies
             currentPony = null!,
             twilight = new TwilightSparkle("Twilight Sparkle", Vector3.zero),
             applejack = new Applejack("Applejack", new Vector3(-0.3f, 0.1f, 0)),
-            fluttershy = new Fluttershy("Fluttershy", new Vector3(-0.6f, 0.1f, 0f)),
+            fluttershy = new Fluttershy("Fluttershy", new Vector3(-0.5f, 0.1f, 0f)),
             pinkie = new PinkiePie("Pinkie Pie", Vector3.zero),
             rainbow = new RainbowDash("Rainbow Dash", Vector3.zero),
             rarity = new Rarity("Rarity", Vector3.zero);

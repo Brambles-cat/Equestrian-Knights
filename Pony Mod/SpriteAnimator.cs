@@ -9,38 +9,35 @@ namespace PonyMod {
         private static bool initialized = false;
         public static GameObject displayedPony = new GameObject();
         private static CustomAnimationController animCtrlr = null!;
+        private static HeroControllerStates controllerStates = null!;
+        private static HeroAnimationController knightAnim = null!;
         public static void init(On.HeroController.orig_Awake orig, HeroController self)
         {
-            //Pony.currentPony = Pony.fluttershy;
             orig(self);
-            displayedPony.transform.SetParent(HeroController.instance.transform);
-            displayedPony.transform.position = HeroController.instance.transform.position;
+            displayedPony.transform.SetParent(self.transform);
             animCtrlr = displayedPony.GetAddComponent<CustomAnimationController>();
-            
-        }
 
-        public static void StartSpritesTemp() // ponyswitcher
-        {
-            displayedPony.transform.position = HeroController.instance.transform.position + Pony.currentPony.centerOffset;
-            initialized = true;
+            controllerStates = self.cState;
+            knightAnim = self.GetComponent<HeroAnimationController>();
+            displayedPony.transform.position = self.transform.position + Pony.currentPony.centerOffset;
+
+            SpriteRenderer sr = displayedPony.GetAddComponent<SpriteRenderer>();
+            sr.lightProbeUsage = UnityEngine.Rendering.LightProbeUsage.Off;
         }
 
         public static void AnimationUpdate()
         {
-            if (!initialized) return;
-
-            ActorStates actorState = HeroController.instance.GetComponent<HeroAnimationController>().actorState;
-            HeroControllerStates controllerStates = HeroController.instance.cState;  // move this elsewhere and the above line as well
+            ActorStates actorState = knightAnim.actorState;
 
             if (actorState == ActorStates.running)
             {
                 playIfNotAlready(Pony.AnimState.walk);
                 if (controllerStates.inWalkZone)
                 {
-                    animCtrlr.anim.fps = 20;
+                    animCtrlr.anim.fps = 24;
                     return;
                 }
-                animCtrlr.anim.fps = 32;
+                animCtrlr.anim.fps = 35;
             }
             else if (actorState == ActorStates.idle)
             {
@@ -72,7 +69,11 @@ namespace PonyMod {
         }
         public static void updateOffset()
         {
-            displayedPony.transform.position = HeroController.instance.transform.position + Pony.currentPony.centerOffset;
+            displayedPony.transform.position =
+                new Vector3(
+                    HeroController.instance.transform.position.x + (controllerStates.facingRight ? Pony.currentPony.centerOffset.x : -Pony.currentPony.centerOffset.x),
+                    HeroController.instance.transform.position.y + Pony.currentPony.centerOffset.y
+                );
         }
     }
 }
