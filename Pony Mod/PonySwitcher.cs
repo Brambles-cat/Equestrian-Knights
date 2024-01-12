@@ -1,7 +1,5 @@
 ﻿using Modding;
 using PonyMod.Ponies;
-using System;
-using System.Collections.Generic;
 using static PonyMod.PonyMod;
 
 namespace PonyMod
@@ -17,7 +15,7 @@ namespace PonyMod
             Pony.currentPony = Pony.getFromStr(data.currentPony);
             Logger.Log(data.currentPony);
             SpriteAnimator.updateOffset();
-            SpriteAnimator.play(Pony.currentPony.currentAnim);
+            SpriteAnimator.play(Pony.currentPony.currentAnimState);
         }
 
         public static void previousPony()
@@ -27,7 +25,7 @@ namespace PonyMod
             Logger.Log(data.currentPony);
             Pony.currentPony = Pony.getFromStr(data.currentPony);
             SpriteAnimator.updateOffset();
-            SpriteAnimator.play(Pony.currentPony.currentAnim);
+            SpriteAnimator.play(Pony.currentPony.currentAnimState);
         }
     }
 }
