@@ -1,11 +1,8 @@
 using Modding;
-using System.Collections.Generic;
 using UnityEngine;
 using Satchel;
 using PonyMod.Ponies;
-using System;
-using System.Linq;
-using System.IO;
+using HutongGames.PlayMaker.Actions;
 
 namespace PonyMod
 {
@@ -34,14 +31,66 @@ namespace PonyMod
         {
             orig(self);
             //rb = HeroController.instance.GetComponent<Rigidbody2D>();
+            PlayMakerFSM
+                    color_fader = HeroController.instance.heroLight.gameObject.LocateMyFSM("color_fader"),
+                    Light_Control = HeroController.instance.heroLight.gameObject.LocateMyFSM("HeroLight Control");
+
+            Log($"{color_fader != null} {Light_Control != null}");
         }
 
         Vector3 offset = new Vector3(0, 0, 0);
+
+        public void LogAllObjects(Transform parent, string tabs) {
+            Log(tabs + parent.name);
+            for(int i = 0; i < parent.childCount; ++i)
+            {
+                var child = parent.GetChild(i);
+                if (child.gameObject.activeSelf)
+                    LogAllObjects(parent.GetChild(i), tabs + "\t");
+            }
+        }
+
         public void OnHeroUpdate()
         {
 
             //HeroController.instance.AffectedByGravity(false);
-            if (Input.GetKeyDown(KeyCode.H))
+
+            // unlock all ponies
+            if(Input.GetKeyDown(KeyCode.U))
+            {
+                string[] ponies = { "twilight sparkle", "applejack", "fluttershy", "pinkie pie", "rainbow dash", "rarity" };
+                foreach (var pony in ponies) {
+                    if (!data.party.Contains(pony))
+                        data.party.Add(pony);
+                }
+                //Log(HeroController.instance.heroLight.gameObject.LocateMyFSM("Light-FSM") == null);
+                //Log(HeroController.instance.heroLight.gameObject.LocateMyFSM("Vignette-Darkness Control") == null);
+            }
+            else if (Input.GetKeyDown(KeyCode.O))
+            {
+                //Log(HeroController.instance.heroLight.gameObject.LocateMyFSM("color_fader").FsmVariables.);
+                GameObject[] o = HeroController.instance.gameObject.scene.GetRootGameObjects(); // .GetAllGameObjects();
+                
+                foreach (var ob in o)
+                {
+                    LogAllObjects(ob.transform, "");
+                }
+                //GameObject light = HeroController.instance.gameObject.scene.FindGameObject("Light");
+                //Log(light);
+                //if (light != null)
+                //{
+                //    light.LocateMyFSM("FSM").RemoveAction("Init", 3);
+                //}
+            }
+            else if(Input.GetKeyDown(KeyCode.V)) {
+                EaseColor c = HeroController.instance.heroLight.gameObject.LocateMyFSM("color_fader").GetAction<EaseColor>("Up", 3);
+                c.Active = false;
+                c.Enabled = false;
+                /*HeroController.instance.heroLight.gameObject.LocateMyFSM("color_fader").InsertAction("Up", () =>
+                {
+                    Log("");
+                }, 3);*/
+            } else if (Input.GetKeyDown(KeyCode.H))
             {
                 PonySwitcher.previousPony();
             }
@@ -73,7 +122,7 @@ namespace PonyMod
                 SpriteAnimator.displayedPony.transform.position = HeroController.instance.transform.position + offset;
                 Log(offset);
             }
-            else if(Input.GetKeyDown(KeyCode.K))
+            else if (Input.GetKeyDown(KeyCode.K))
             {
                 offset.y += -0.1f;
                 SpriteAnimator.displayedPony.transform.position = HeroController.instance.transform.position + offset;
