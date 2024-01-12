@@ -13,7 +13,7 @@ namespace PonyMod.Ponies
         public int hitpoints = 4;
         public bool isCrystalized = false, canFly = false;
         public Vector3 centerOffset;
-        public AnimState currentAnim = AnimState.idle;
+        public AnimState currentAnimState = AnimState.idle;
 
         public Pony(string ponyName, Vector3 centerOffset) {
             foreach (AnimState state in Enum.GetValues(typeof(AnimState))) {
@@ -28,14 +28,15 @@ namespace PonyMod.Ponies
             this.centerOffset = centerOffset;
         }
 
+        // offset seems to be fixed with the animations, might simplify this later
         public static Pony
             currentPony = null!,
-            twilight = new TwilightSparkle("Twilight Sparkle", Vector3.zero),
-            applejack = new Applejack("Applejack", new Vector3(-0.3f, 0.1f, 0)),
-            fluttershy = new Fluttershy("Fluttershy", new Vector3(-0.5f, 0.1f, 0f)),
-            pinkie = new PinkiePie("Pinkie Pie", Vector3.zero),
-            rainbow = new RainbowDash("Rainbow Dash", Vector3.zero),
-            rarity = new Rarity("Rarity", Vector3.zero);
+            twilight = new TwilightSparkle("Twilight Sparkle", new Vector3(-0.5f, -0.1f, 0)),
+            applejack = new Applejack("Applejack", new Vector3(-0.5f, -0.1f, 0)),
+            fluttershy = new Fluttershy("Fluttershy", new Vector3(-0.5f, -0.1f, 0)),
+            pinkie = new PinkiePie("Pinkie Pie", new Vector3(-0.5f, -0.1f, 0)),
+            rainbow = new RainbowDash("Rainbow Dash", new Vector3(-0.5f, -0.1f, 0)),
+            rarity = new Rarity("Rarity", new Vector3(-0.5f, -0.1f, 0));
 
         public static Pony getFromStr(string pony)
         {
